@@ -1,0 +1,73 @@
+# ===================================
+# Node.js / Express Backend Git Ignore
+# ===================================
+
+# Dependencies
+/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build and output directories
+/dist
+/build
+/out
+
+# Logs
+logs
+*.log
+logs/*
+debug.log
+error.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# IDE / Editor settings
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Coverage / Testing
+coverage/
+.nyc_output
+jest-results.json
+test-results.xml
+
+# Temporary files
+.tmp/
+temp/
+cache/
+*.tmp
+*.bak
+
+# PM2 / Process manager files
+pids/
+*.pid
+*.pid.lock
+
+# TypeScript (if using)
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Misc
+*.swp
+*.swm
+*.swo
+*.orig
