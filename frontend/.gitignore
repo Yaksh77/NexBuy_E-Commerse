@@ -1,0 +1,63 @@
+# ===================================
+# Vite + React Frontend Git Ignore
+# ===================================
+
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+
+# Vite build output
+dist/
+build/
+out/
+
+# Logs
+logs/
+*.log
+*.log.*
+debug.log
+error.log
+
+# Editor / IDE folders
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary / cache folders
+.cache/
+.temp/
+tmp/
+*.tmp
+*.bak
+
+# Test coverage
+coverage/
+.nyc_output
+
+# TypeScript (if used)
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Local environment files (for Vite)
+vite.config.ts.timestamp*
+vite.config.js.timestamp*
+
+# Misc
+*.swp
+*.swo
+*.orig
