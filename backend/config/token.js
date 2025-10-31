@@ -11,3 +11,15 @@ export const genToken = async (userId) => {
     console.log(error);
   }
 };
+
+export const genTokenAdmin = async (email) => {
+  try {
+    let token = await jwt.sign({ email }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    return token;
+  } catch (error) {
+    console.log("Admin token error: ", error);
+  }
+};
