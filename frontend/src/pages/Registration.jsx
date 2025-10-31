@@ -8,6 +8,7 @@ import { authDataContext } from "../context/authContext";
 import axios from "axios";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../utils/Firebase";
+import { userDataContext } from "../context/UserContext";
 
 function Registration() {
   const navigate = useNavigate();
@@ -25,10 +26,10 @@ function Registration() {
         { name, email, password },
         { withCredentials: true }
       );
+      const { getCurrentUser } = useContext(userDataContext);
+      getCurrentUser();
+      navigate("/");
       console.log(response.data);
-      setName("");
-      setEmail("");
-      setPassword("");
     } catch (error) {
       console.log(error);
     }
@@ -46,6 +47,8 @@ function Registration() {
         { name, email },
         { withCredentials: true }
       );
+      getCurrentUser();
+      navigate("/");
       console.log(result.data);
     } catch (error) {
       console.log(error);

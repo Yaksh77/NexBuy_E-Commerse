@@ -21,6 +21,10 @@ dist/
 build/
 out/
 
+# Ignore all images in assets folder
+src/assets/*
+
+
 # Logs
 logs/
 *.log

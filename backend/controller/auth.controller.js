@@ -49,6 +49,7 @@ export const registration = async (req, res) => {
 export const login = async (req, res) => {
   try {
     let { email, password } = req.body;
+
     let user = await User.findOne({
       email,
     });
@@ -113,6 +114,7 @@ export const googleLogin = async (req, res) => {
 
     return res.status(200).json(user);
   } catch (error) {
-    console.log("Google login error : ", error);
+    console.log("Google login error: ", error);
+    return res.status(500).json({ message: `Google login error: ${error}` });
   }
 };

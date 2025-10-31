@@ -3,10 +3,11 @@ import dotenv from "dotenv";
 import { connectToDB } from "./config/db.js";
 import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.routes.js";
+import userRouter from "./routes/user.routes.js";
+import cors from "cors";
 dotenv.config({
   path: "./.env",
 });
-import cors from "cors";
 
 const app = express();
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use(
 );
 
 app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("Server runs perfectly ✔️");
