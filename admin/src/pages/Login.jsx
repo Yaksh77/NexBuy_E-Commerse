@@ -5,6 +5,7 @@ import { IoEyeSharp } from "react-icons/io5";
 import { IoEyeOffSharp } from "react-icons/io5";
 import { authDataContext } from "../../context/AuthContext";
 import axios from "axios";
+import { adminDataContext } from "../../context/AdminContext";
 
 function Login() {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { serverUrl } = useContext(authDataContext);
+  const { getAdmin } = useContext(adminDataContext);
 
   const adminLogin = async (e) => {
     e.preventDefault();
@@ -21,6 +23,7 @@ function Login() {
         { email, password },
         { withCredentials: true }
       );
+      getAdmin();
       navigate("/");
     } catch (error) {
       console.log("Admin login error: ", error);
