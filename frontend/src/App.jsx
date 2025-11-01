@@ -11,12 +11,16 @@ function App() {
   const { userData } = useContext(userDataContext);
   return (
     <>
-      {userData && <Navbar />}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/registration" element={<Registration />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <Navbar />
+      {!userData ? (
+        <Login />
+      ) : (
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/registration" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      )}
     </>
   );
 }
