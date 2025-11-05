@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.routes.js";
 import userRouter from "./routes/user.routes.js";
 import cors from "cors";
+import prdouctRouter from "./routes/product.routes.js";
 dotenv.config({
   path: "./.env",
 });
@@ -21,6 +22,7 @@ app.use(
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
+app.use("/api/product", prdouctRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("Server runs perfectly ✔️");
