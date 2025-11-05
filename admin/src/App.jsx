@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Add from "./pages/Add";
-import List from "./pages/List";
 import Orders from "./pages/Orders";
 import Login from "./pages/Login";
 import { useContext } from "react";
 import { adminDataContext } from "../context/AdminContext";
 import Navbar from "./components/Navbar";
+import Lists from "./pages/Lists";
 
 function App() {
   let { adminData } = useContext(adminDataContext);
@@ -20,7 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/add" element={<Add />} />
-            <Route path="/lists" element={<List />} />
+            <Route path="/lists" element={<Lists />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/login" element={<Login />} />
           </Routes>

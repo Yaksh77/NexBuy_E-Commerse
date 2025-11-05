@@ -1,6 +1,11 @@
 import { Router } from "express";
-import { addProduct } from "../controller/product.controller.js";
+import {
+  addProduct,
+  listProducts,
+  removeProduct,
+} from "../controller/product.controller.js";
 import { upload } from "../middleware/multer.js";
+import adminAuth from "../middleware/adminAuth.js";
 
 const prdouctRouter = Router();
 
@@ -14,5 +19,7 @@ prdouctRouter.post(
   ]),
   addProduct
 );
+prdouctRouter.get("/list-products", adminAuth, listProducts);
+prdouctRouter.get("/remove-product/:productId", adminAuth, removeProduct);
 
 export default prdouctRouter;
