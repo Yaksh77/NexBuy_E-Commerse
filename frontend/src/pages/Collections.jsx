@@ -6,7 +6,7 @@ import { shopDataContext } from "../context/ShopContext";
 import Card from "../components/Card";
 
 function Collections() {
-  const { products } = useContext(shopDataContext);
+  const { products, search, showSearch } = useContext(shopDataContext);
   const [showFilter, setShowFilter] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [category, setCategory] = useState([]);
@@ -31,6 +31,14 @@ function Collections() {
 
   const applyFilter = () => {
     let productCopy = products.slice();
+    console.log(search.toLowerCase().slice(0, 2));
+
+    if (showSearch && search) {
+      productCopy = productCopy.filter((item) =>
+        item.name.toLowerCase().includes(search)
+      );
+    }
+
     if (category.length > 0) {
       productCopy = productCopy.filter((item) =>
         category.includes(item.category)
@@ -44,16 +52,34 @@ function Collections() {
     setFilteredProducts(productCopy);
   };
 
+  const sortProducts = () => {
+    let fbCopy = filteredProducts.slice();
+    switch (sortType) {
+      case "low-high":
+        setFilteredProducts(fbCopy.sort((a, b) => a.price - b.price));
+        break;
+      case "high-low":
+        setFilteredProducts(fbCopy.sort((a, b) => b.price - a.price));
+        break;
+      default:
+        applyFilter();
+    }
+  };
+
+  useEffect(() => {
+    sortProducts();
+  }, [sortType]);
+
   useEffect(() => {
     setFilteredProducts(products);
   }, [products]);
 
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory]);
+  }, [category, subCategory, search, showSearch]);
 
   return (
-    <div className="w-[98vw] min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] flex items-start flex-col md:flex-row justify-start pt-[70px] overflow-x-hidden z-[2]">
+    <div className="w-[98vw] min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] flex items-start flex-col md:flex-row justify-start pt-[70px] overflow-x-hidden z-[2] pb-[110px]">
       <div
         className={`md:w-[30vw] lg:w-[20vw] w-[100vw] md:min-h-[100vh] 
       p-[20px] border-r-[1px] border-gray-400 text-[#aaf5fa] lg:fixed ${
@@ -148,6 +174,7 @@ function Collections() {
             name=""
             id=""
             className="bg-slate-600 w-[60%] md:w-[200px] h-[50px] px-[10px] text-white rounded-lg hover:border-[#46d1f7] border-[2px]"
+            onChange={(e) => setSortType(e.target.value)}
           >
             <option value="relevant" className="w-[100%] h-[100%]">
               Sort By: Relevant

@@ -10,13 +10,14 @@ import { authDataContext } from "../context/authContext";
 import { IoHome } from "react-icons/io5";
 import { MdCollectionsBookmark } from "react-icons/md";
 import { MdContacts } from "react-icons/md";
+import { shopDataContext } from "../context/ShopContext";
 
 function Navbar() {
-  const [showSearch, setShowSearch] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const { getCurrentUser, userData } = useContext(userDataContext);
   const { serverUrl } = useContext(authDataContext);
-
+  const { showSearch, setShowSearch, search, setSearch } =
+    useContext(shopDataContext);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -31,6 +32,7 @@ function Navbar() {
       console.log(error);
     }
   };
+
   return (
     <div className="w-[100vw] h-[70px] bg-[#ecfafaec] z-10 fixed top-0 flex items-center justify-between px-[30px] shadow-md shadow-black">
       <div className="w-[20%] lg:w-[35%] flex items-center justify-start gap-[30px] ">
@@ -68,7 +70,10 @@ function Navbar() {
       <div className="w-[30%] flex items-center justify-end gap-[20px]">
         <FaSearch
           className="w-[30px] h-[30px] text-[#000000] cursor-pointer"
-          onClick={() => setShowSearch((prev) => !prev)}
+          onClick={() => {
+            setShowSearch((prev) => !prev);
+            navigate("/collections");
+          }}
         />
         {!userData ? (
           <FaRegUserCircle
@@ -94,6 +99,8 @@ function Navbar() {
             type="text"
             className="lg:w-[50%]  w-[80%] h-[60%] bg-[#233533] rounded-[30px] px-[50px] placeholder:text-white text-white text-[18px]"
             placeholder="Search Here"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       )}

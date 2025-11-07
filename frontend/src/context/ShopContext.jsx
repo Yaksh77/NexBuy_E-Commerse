@@ -6,6 +6,8 @@ export const shopDataContext = createContext();
 
 function ShopContext({ children }) {
   const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState("");
+  const [showSearch, setShowSearch] = useState(false);
   const { serverUrl } = useContext(authDataContext);
   const currency = "₹";
   const deliveryFee = 40;
@@ -35,6 +37,10 @@ function ShopContext({ children }) {
     currency,
     deliveryFee,
     getProducts,
+    search,
+    setSearch,
+    showSearch,
+    setShowSearch,
   };
 
   return (
