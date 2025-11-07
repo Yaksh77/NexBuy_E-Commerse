@@ -17,6 +17,7 @@ function Registration() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { serverUrl } = useContext(authDataContext);
+  const { getCurrentUser } = useContext(userDataContext);
 
   const handleRegstration = async (e) => {
     e.preventDefault();
@@ -26,7 +27,6 @@ function Registration() {
         { name, email, password },
         { withCredentials: true }
       );
-      const { getCurrentUser } = useContext(userDataContext);
       getCurrentUser();
       navigate("/");
       console.log(response.data);

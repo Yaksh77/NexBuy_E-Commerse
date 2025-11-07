@@ -3,6 +3,7 @@ import { authDataContext } from "./authContext";
 import axios from "axios";
 
 export const shopDataContext = createContext();
+
 function ShopContext({ children }) {
   const [products, setProducts] = useState([]);
   const { serverUrl } = useContext(authDataContext);
@@ -10,9 +11,12 @@ function ShopContext({ children }) {
   const deliveryFee = 40;
   const getProducts = async () => {
     try {
-      const response = await axios.get(`${serverUrl}/api/product/lists`, {
-        withCredentials: true,
-      });
+      const response = await axios.get(
+        `${serverUrl}/api/product/list-products`,
+        {
+          withCredentials: true,
+        }
+      );
       console.log(response.data);
       if (response.data) {
         setProducts(response.data);
