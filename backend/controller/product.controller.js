@@ -10,7 +10,7 @@ export const addProduct = async (req, res) => {
       category,
       subCategory,
       sizes,
-      bestSeller,
+      bestseller,
     } = req.body;
 
     const image1 = await uploadOnCloudinary(req.files.image1[0].path);
@@ -25,7 +25,7 @@ export const addProduct = async (req, res) => {
       category,
       subCategory,
       sizes: JSON.parse(sizes),
-      bestSeller: bestSeller === "true" ? true : false,
+      bestseller: bestseller === "true" ? true : false,
       date: Date.now(),
       image1,
       image2,

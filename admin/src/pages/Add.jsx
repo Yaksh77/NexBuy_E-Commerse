@@ -50,6 +50,7 @@ function Add() {
         setCategory("Men");
         setSubCategory("TopWear");
         setBestseller(false);
+        setSizes([]);
       }
       console.log(response.data);
     } catch (error) {
@@ -311,6 +312,7 @@ function Add() {
               htmlFor="checkbox"
               className="text-[18px] md:text-[22px] font-semibold"
             >
+              {console.log(bestseller)}
               Add to BestSeller
             </label>
           </div>
