@@ -14,56 +14,52 @@ function Collections() {
   const [sortType, setSortType] = useState("relevant");
 
   const toggleCategory = (e) => {
-    if (category.includes(e.target.value)) {
+    if (category.includes(e.target.value))
       setCategory((prev) => prev.filter((item) => item !== e.target.value));
-    } else {
-      setCategory((prev) => [...prev, e.target.value]);
-    }
+    else setCategory((prev) => [...prev, e.target.value]);
   };
 
   const toggleSubCategory = (e) => {
-    if (subCategory.includes(e.target.value)) {
+    if (subCategory.includes(e.target.value))
       setSubCategory((prev) => prev.filter((item) => item !== e.target.value));
-    } else {
-      setSubCategory((prev) => [...prev, e.target.value]);
-    }
+    else setSubCategory((prev) => [...prev, e.target.value]);
   };
 
   const applyFilter = () => {
     let productCopy = products.slice();
-    console.log(search.toLowerCase().slice(0, 2));
 
     if (showSearch && search) {
       productCopy = productCopy.filter((item) =>
-        item.name.toLowerCase().includes(search)
+        item.name.toLowerCase().includes(search.toLowerCase())
       );
     }
 
-    if (category.length > 0) {
+    if (category.length > 0)
       productCopy = productCopy.filter((item) =>
         category.includes(item.category)
       );
-    }
-    if (subCategory.length > 0) {
+
+    if (subCategory.length > 0)
       productCopy = productCopy.filter((item) =>
         subCategory.includes(item.subCategory)
       );
-    }
+
     setFilteredProducts(productCopy);
   };
 
   const sortProducts = () => {
-    let fbCopy = filteredProducts.slice();
+    let sorted = [...filteredProducts];
     switch (sortType) {
       case "low-high":
-        setFilteredProducts(fbCopy.sort((a, b) => a.price - b.price));
+        sorted.sort((a, b) => a.price - b.price);
         break;
       case "high-low":
-        setFilteredProducts(fbCopy.sort((a, b) => b.price - a.price));
+        sorted.sort((a, b) => b.price - a.price);
         break;
       default:
         applyFilter();
     }
+    setFilteredProducts(sorted);
   };
 
   useEffect(() => {
