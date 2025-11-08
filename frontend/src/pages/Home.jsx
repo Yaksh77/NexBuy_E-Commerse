@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import Background from "../components/Background";
 import Hero from "../components/Hero";
 import Products from "./Products";
+import OurPolicy from "../components/OurPolicy";
+import NewsLetterBox from "../components/NewsLetterBox";
+import Footer from "../components/Footer";
 
 function Home() {
   const heroData = [
@@ -22,8 +25,8 @@ function Home() {
   }, []);
 
   return (
-    <div className="relative w-screen min-h-screen bg-gradient-to-l from-[#141414] to-[#0c2025] text-white">
-      <div className="relative w-full h-[100vh] overflow-hidden">
+    <div className="w-full min-h-screen bg-gradient-to-l from-[#141414] to-[#0c2025] text-white">
+      <section className="relative w-full h-screen overflow-hidden">
         <Background heroCount={heroCount} />
         <div className="absolute inset-0 flex items-center justify-center bg-black/40">
           <Hero
@@ -32,9 +35,12 @@ function Home() {
             setHeroCount={setHeroCount}
           />
         </div>
-      </div>
+      </section>
 
       <Products />
+      <OurPolicy />
+      <NewsLetterBox />
+      <Footer />
     </div>
   );
 }

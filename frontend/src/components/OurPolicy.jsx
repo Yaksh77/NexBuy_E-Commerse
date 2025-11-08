@@ -6,43 +6,49 @@ import { MdSupportAgent } from "react-icons/md";
 
 function OurPolicy() {
   return (
-    <div className="w-[100vw] h-[100vh] md:h-[70vh] flex items-center justify-start flex-col bg-gradient-to-l from-[#141414] to-[#0c2025] gap-[50px]">
-      <div className="h-[8%] w-[100%] text-center mt-[70px]">
-        <Title text1={"OUR"} text2={" POLICY"} />
-        <p className="w-[100%] m-auto text-[13px] md:text-[20px] px-[10px] text-blue-100">
-          Customer-Friendly Policies committed to your satisfaction and safety.
-        </p>
+    <section className="w-full flex flex-col items-center justify-center bg-gradient-to-l from-[#141414] to-[#0c2025] py-16 px-4 text-center">
+      <Title text1={"OUR"} text2={" POLICY"} />
+      <p className="text-blue-100 text-sm md:text-lg mt-2">
+        Customer-Friendly Policies committed to your satisfaction and safety.
+      </p>
+
+      <div className="flex flex-wrap justify-center gap-10 mt-10">
+        {[
+          {
+            icon: (
+              <RiExchangeFundsLine className="w-10 h-10 md:w-14 md:h-14 text-[#90b9ff]" />
+            ),
+            title: "Easy Exchange Policy",
+            desc: "Quick, simple, and customer-friendly exchange process.",
+          },
+          {
+            icon: (
+              <BsPatchCheckFill className="w-10 h-10 md:w-14 md:h-14 text-[#90b9ff]" />
+            ),
+            title: "7 Days Return Policy",
+            desc: "Exchange or return within 7 days — no hassle.",
+          },
+          {
+            icon: (
+              <MdSupportAgent className="w-10 h-10 md:w-14 md:h-14 text-[#90b9ff]" />
+            ),
+            title: "Best Customer Support",
+            desc: "Trusted support — loved by our customers.",
+          },
+        ].map((item, i) => (
+          <div
+            key={i}
+            className="w-[280px] md:w-[350px] flex flex-col items-center gap-3 text-center"
+          >
+            {item.icon}
+            <p className="font-semibold text-lg md:text-2xl text-[#a5e8f7]">
+              {item.title}
+            </p>
+            <p className="text-sm md:text-base text-[aliceblue]">{item.desc}</p>
+          </div>
+        ))}
       </div>
-      <div className="w-[100%] md:min-h-[50%] h-[20%] flex items-center justify-center flex-wrap lg:gap-[50px] gap-[90px]">
-        <div className="w-[400px] max-w-[90%] h-[60%] flex items-center justify-center flex-col gap-[10px]">
-          <RiExchangeFundsLine className="md:w-[60px] w-[30px] h-[30px] md:h-[60px] text-[#90b9ff]" />
-          <p className="font-semibold md:text-[25px] text-[19px] text-[#a5e8f7]">
-            Easy exchange policy
-          </p>
-          <p className="font-semibold md:text-[18px] text-[12px] text-[aliceblue] text-center">
-            Exchange made easy quick, simple, and customer-friendly process.
-          </p>
-        </div>
-        <div className="w-[400px] max-w-[90%] h-[60%] flex items-center justify-center flex-col gap-[10px]">
-          <BsPatchCheckFill className="md:w-[60px] w-[30px] h-[30px] md:h-[60px] text-[#90b9ff]" />
-          <p className="font-semibold md:text-[25px] text-[19px] text-[#a5e8f7]">
-            7 Days Return policy
-          </p>
-          <p className="font-semibold md:text-[18px] text-[12px] text-[aliceblue] text-center">
-            User can easely exchange with this policy.
-          </p>
-        </div>
-        <div className="w-[400px] max-w-[90%] h-[60%] flex items-center justify-center flex-col gap-[10px]">
-          <MdSupportAgent className="md:w-[60px] w-[30px] h-[30px] md:h-[60px] text-[#90b9ff]" />
-          <p className="font-semibold md:text-[25px] text-[19px] text-[#a5e8f7]">
-            Best Customer Suppport
-          </p>
-          <p className="font-semibold md:text-[18px] text-[12px] text-[aliceblue] text-center">
-            Trusted customer support - Loved by customers.
-          </p>
-        </div>
-      </div>
-    </div>
+    </section>
   );
 }
 
