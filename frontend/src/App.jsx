@@ -9,6 +9,7 @@ import { userDataContext } from "./context/UserContext";
 import Collections from "./pages/Collections";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   const { userData } = useContext(userDataContext);
@@ -68,6 +69,16 @@ function App() {
           element={
             userData ? (
               <Contact />
+            ) : (
+              <Navigate to="/login" state={{ from: location.pathname }} />
+            )
+          }
+        />
+        <Route
+          path="/product-details/:productId"
+          element={
+            userData ? (
+              <ProductDetails />
             ) : (
               <Navigate to="/login" state={{ from: location.pathname }} />
             )
