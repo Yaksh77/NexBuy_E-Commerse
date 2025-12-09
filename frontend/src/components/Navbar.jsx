@@ -88,7 +88,10 @@ function Navbar() {
             {userData?.name?.slice(0, 1)?.toUpperCase()}
           </div>
         )}
-        <FaShoppingCart className="w-[30px] h-[30px] text-[#000000] cursor-pointer hidden md:block" />
+        <FaShoppingCart
+          className="w-[30px] h-[30px] text-[#000000] cursor-pointer hidden md:block"
+          onClick={() => navigate("/cart")}
+        />
         <p className="absolute w-[18px] h-[18px] items-center md:flex justify-center bg-black px-[5px] py-[2px] text-white rounded-full text-[9px] top-[10px] right-[18px] hidden md:block">
           {getCartCount()}
         </p>
@@ -162,7 +165,10 @@ function Navbar() {
           <MdContacts className="w-[25px] h-[25px] text-white md:hidden" />
           Contact
         </button>
-        <button className="text-white flex items-center justify-center flex-col gap-[2px]">
+        <button
+          className="text-white flex items-center justify-center flex-col gap-[2px]"
+          onClick={() => navigate("/cart")}
+        >
           <FaShoppingCart className="w-[25px] h-[25px] text-white md:hidden" />
           Cart
         </button>

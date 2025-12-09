@@ -123,7 +123,7 @@ function ShopContext({ children }) {
     return totalCount;
   };
 
-  const getCartAmmount = async () => {
+  const getCartAmmount = () => {
     let totalAmount = 0;
     try {
       for (let items in cartItem) {
