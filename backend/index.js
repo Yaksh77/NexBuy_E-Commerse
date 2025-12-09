@@ -6,6 +6,7 @@ import authRouter from "./routes/auth.routes.js";
 import userRouter from "./routes/user.routes.js";
 import cors from "cors";
 import prdouctRouter from "./routes/product.routes.js";
+import cartRouter from "./routes/cart.routes.js";
 dotenv.config({
   path: "./.env",
 });
@@ -23,6 +24,7 @@ app.use(
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/product", prdouctRouter);
+app.use("/api/cart", cartRouter);
 
 app.listen(process.env.PORT, () => {
   console.log("Server runs perfectly ✔️");
