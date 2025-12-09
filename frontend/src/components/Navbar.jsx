@@ -16,7 +16,7 @@ function Navbar() {
   const [showProfile, setShowProfile] = useState(false);
   const { getCurrentUser, userData } = useContext(userDataContext);
   const { serverUrl } = useContext(authDataContext);
-  const { showSearch, setShowSearch, search, setSearch } =
+  const { showSearch, setShowSearch, search, setSearch, getCartCount } =
     useContext(shopDataContext);
   const navigate = useNavigate();
 
@@ -90,7 +90,7 @@ function Navbar() {
         )}
         <FaShoppingCart className="w-[30px] h-[30px] text-[#000000] cursor-pointer hidden md:block" />
         <p className="absolute w-[18px] h-[18px] items-center md:flex justify-center bg-black px-[5px] py-[2px] text-white rounded-full text-[9px] top-[10px] right-[18px] hidden md:block">
-          10
+          {getCartCount()}
         </p>
       </div>
       {showSearch && (
@@ -167,7 +167,7 @@ function Navbar() {
           Cart
         </button>
         <p className="absolute w-[18px] h-[18px] items-center flex justify-center px-[5px] py-[2px] text-black rounded-full text-[9px] top-[8px] right-[18px] bg-white">
-          10
+          {getCartCount()}
         </p>
       </div>
     </div>
