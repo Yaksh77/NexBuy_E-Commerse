@@ -37,3 +37,25 @@ export const userOrders = async (req, res) => {
     res.status(500).json({ message: "userOrders error" });
   }
 };
+
+// For Admin
+
+export const allOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({});
+    res.status(200).json(orders);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "adminAllOrders error" });
+  }
+};
+
+export const updateStatus = async (req, res) => {
+  try {
+    const { orderId, status } = req.body;
+    await Order.findByIdAndUpdate(orderId, { status });
+    return res.status(201).json({ message: "Status Updated" });
+  } catch (error) {}
+  console.log(error);
+  res.status(500).json({ message: "adminUpdateStatus error" });
+};

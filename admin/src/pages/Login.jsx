@@ -6,6 +6,7 @@ import { IoEyeOffSharp } from "react-icons/io5";
 import { authDataContext } from "../../context/AuthContext";
 import axios from "axios";
 import { adminDataContext } from "../../context/AdminContext";
+import { useEffect } from "react";
 
 function Login() {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ function Login() {
       console.log("Admin login error: ", error);
     }
   };
+
   return (
     <div className="w-[100vw] h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] text-[white] flex flex-col items-center justify-start">
       <div
