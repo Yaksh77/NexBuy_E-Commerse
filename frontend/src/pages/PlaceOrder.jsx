@@ -33,6 +33,34 @@ function PlaceOrder() {
     setFormData((data) => ({ ...data, [name]: value }));
   };
 
+  const initPay = (order) => {
+    const options = {
+      key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+      amount: order.amount,
+      currency: order.currency,
+      name: "NexBuy",
+      description: "Order Payment",
+      order_id: order.id, // ✅ MUST be order.id
+      handler: async (response) => {
+        const { data } = await axios.post(
+          `${serverUrl}/api/order/verify-razorpay`,
+          response,
+          { withCredentials: true }
+        );
+        if (data) {
+          setCartItem({});
+          navigate("/my-orders");
+        }
+      },
+      theme: {
+        color: "#141414",
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -51,6 +79,7 @@ function PlaceOrder() {
           }
         }
       }
+
       let orderData = {
         address: formData,
         items: orderItems,
@@ -69,6 +98,16 @@ function PlaceOrder() {
             navigate("/my-orders");
           } else {
             console.log(response.data.message);
+          }
+          break;
+        case "RAZORPAY":
+          const responseRazorpay = await axios.post(
+            `${serverUrl}/api/order/razorpay`,
+            orderData,
+            { withCredentials: true }
+          );
+          if (responseRazorpay.data) {
+            initPay(responseRazorpay.data);
           }
           break;
         default:
@@ -206,11 +245,11 @@ function PlaceOrder() {
           <div className="w-[100%] h-[30vh] lg:h-[100px] flex items-start mt-[20px] lg:mt-[0px] justify-center gap-[50px]">
             <button
               className={`w-[150px] h-[50px] rounded-sm ${
-                method === "razorpay"
+                method === "RAZORPAY"
                   ? "border-[5px] border-blue-900 rounded-sm"
                   : ""
               } `}
-              onClick={() => setMethod("razorpay")}
+              onClick={() => setMethod("RAZORPAY")}
             >
               <img
                 src={razorpay}

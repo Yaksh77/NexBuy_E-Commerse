@@ -1,5 +1,8 @@
-import express from "express";
 import dotenv from "dotenv";
+dotenv.config({
+  path: "./.env",
+});
+import express from "express";
 import { connectToDB } from "./config/db.js";
 import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.routes.js";
@@ -8,9 +11,6 @@ import cors from "cors";
 import prdouctRouter from "./routes/product.routes.js";
 import cartRouter from "./routes/cart.routes.js";
 import orderRouter from "./routes/order.routes.js";
-dotenv.config({
-  path: "./.env",
-});
 
 const app = express();
 app.use(express.json());

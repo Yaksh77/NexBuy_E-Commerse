@@ -1,5 +1,13 @@
+import dotenv from "dotenv";
+dotenv.config();
 import Order from "../model/order.model.js";
 import User from "../model/user.model.js";
+import RazorPay from "razorpay";
+
+const razorpayInstance = new RazorPay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
 
 export const placeOrder = async (req, res) => {
   try {
@@ -58,4 +66,53 @@ export const updateStatus = async (req, res) => {
   } catch (error) {}
   console.log(error);
   res.status(500).json({ message: "adminUpdateStatus error" });
+};
+
+export const placeOrderRazorpay = async (req, res) => {
+  try {
+    const { items, amount, address } = req.body;
+    const userId = req.userId;
+    const orderData = {
+      items,
+      amount,
+      userId,
+      address,
+      paymentMethod: "Razorpay",
+      payment: false,
+      date: Date.now(),
+    };
+
+    const newOrder = new Order(orderData);
+    await newOrder.save();
+
+    const options = {
+      amount: amount * 100,
+      currency: "INR",
+      receipt: newOrder._id.toString(),
+    };
+
+    const razorpayOrder = await razorpayInstance.orders.create(options);
+    return res.status(200).json(razorpayOrder);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "razorpayOrder error" });
+  }
+};
+
+export const verifyRazorpay = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { razorpay_order_id } = req.body;
+    const orderInfo = await razorpayInstance.orders.fetch(razorpay_order_id);
+    if (orderInfo.status === "paid") {
+      await Order.findByIdAndUpdate(orderInfo.receipt, { payment: true });
+      await User.findByIdAndUpdate(userId, { cartData: {} });
+      res.status(200).json({ message: "Payment Successful" });
+    } else {
+      res.json({ message: "Payment Failed" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "verifyRazorpay error" });
+  }
 };
