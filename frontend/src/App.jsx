@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import PlaceOrder from "./pages/PlaceOrder";
+import ConfirmOrder from "./pages/ConfirmOrder";
 
 function App() {
   const { userData } = useContext(userDataContext);
@@ -101,6 +102,16 @@ function App() {
           element={
             userData ? (
               <PlaceOrder />
+            ) : (
+              <Navigate to="/login" state={{ from: location.pathname }} />
+            )
+          }
+        />
+        <Route
+          path="/confirmed-order"
+          element={
+            userData ? (
+              <ConfirmOrder />
             ) : (
               <Navigate to="/login" state={{ from: location.pathname }} />
             )
