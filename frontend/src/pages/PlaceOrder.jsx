@@ -66,7 +66,7 @@ function PlaceOrder() {
           );
           if (response.data) {
             setCartItem({});
-            navigate("/confirmed-order");
+            navigate("/my-orders");
           } else {
             console.log(response.data.message);
           }

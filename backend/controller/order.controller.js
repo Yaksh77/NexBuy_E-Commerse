@@ -26,3 +26,14 @@ export const placeOrder = async (req, res) => {
     res.status(500).json({ message: "Order place error" });
   }
 };
+
+export const userOrders = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const orders = await Order.find({ userId });
+    return res.status(200).json(orders);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "userOrders error" });
+  }
+};

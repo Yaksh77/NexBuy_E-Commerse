@@ -12,7 +12,7 @@ import Contact from "./pages/Contact";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import PlaceOrder from "./pages/PlaceOrder";
-import ConfirmOrder from "./pages/ConfirmOrder";
+import Order from "./pages/Order";
 
 function App() {
   const { userData } = useContext(userDataContext);
@@ -108,10 +108,10 @@ function App() {
           }
         />
         <Route
-          path="/confirmed-order"
+          path="/my-orders"
           element={
             userData ? (
-              <ConfirmOrder />
+              <Order />
             ) : (
               <Navigate to="/login" state={{ from: location.pathname }} />
             )
