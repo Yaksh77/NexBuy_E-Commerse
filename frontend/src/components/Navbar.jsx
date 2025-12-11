@@ -14,7 +14,7 @@ import { shopDataContext } from "../context/ShopContext";
 
 function Navbar() {
   const [showProfile, setShowProfile] = useState(false);
-  const { getCurrentUser, userData } = useContext(userDataContext);
+  const { getCurrentUser, userData, setUserData } = useContext(userDataContext);
   const { serverUrl } = useContext(authDataContext);
   const { showSearch, setShowSearch, search, setSearch, getCartCount } =
     useContext(shopDataContext);
@@ -22,11 +22,10 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get(`${serverUrl}/api/auth/logout`, {
+      await axios.get(`${serverUrl}/api/auth/logout`, {
         withCredentials: true,
       });
-      console.log(response.data);
-      getCurrentUser();
+      setUserData(null);
       navigate("/login");
     } catch (error) {
       console.log(error);
