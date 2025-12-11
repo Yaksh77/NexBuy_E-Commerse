@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Title from "../components/Title";
 import { useContext } from "react";
 import { shopDataContext } from "../context/ShopContext";
-import { authDataContext } from "../context/authContext";
+import { authDataContext } from "../context/AuthContext";
 import axios from "axios";
 import { useEffect } from "react";
 

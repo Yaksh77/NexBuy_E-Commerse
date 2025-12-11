@@ -6,7 +6,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { userDataContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { authDataContext } from "../context/authContext";
+import { authDataContext } from "../context/AuthContext";
 import { IoHome } from "react-icons/io5";
 import { MdCollectionsBookmark } from "react-icons/md";
 import { MdContacts } from "react-icons/md";
