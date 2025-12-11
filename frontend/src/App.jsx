@@ -14,7 +14,7 @@ import Cart from "./pages/Cart";
 import PlaceOrder from "./pages/PlaceOrder";
 import Order from "./pages/Order";
 import { ToastContainer } from "react-toastify";
-import NotFound from "./pages/Notfound";
+import NotFound from "./pages/NotFound";
 import Ai from "./components/Ai";
 
 function App() {
