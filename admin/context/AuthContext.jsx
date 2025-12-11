@@ -3,7 +3,7 @@ import { createContext } from "react";
 export const authDataContext = createContext();
 
 function AuthContext({ children }) {
-  const serverUrl = "http://localhost:3000";
+  const serverUrl = "https://nexbuy-e-commerse-backend.onrender.com";
   let value = {
     serverUrl,
   };
