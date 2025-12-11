@@ -131,12 +131,21 @@ function Navbar() {
                 Logout
               </li>
             )}
-            <li className="w-[100%] hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer">
+            <li
+              className="w-[100%] hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer"
+              onClick={() => {
+                navigate("/my-orders");
+                setShowProfile(false);
+              }}
+            >
               Orders
             </li>
             <li
               className="w-[100%] hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer"
-              onClick={() => navigate("/about")}
+              onClick={() => {
+                navigate("/about");
+                setShowProfile(false);
+              }}
             >
               About
             </li>

@@ -14,6 +14,8 @@ import Cart from "./pages/Cart";
 import PlaceOrder from "./pages/PlaceOrder";
 import Order from "./pages/Order";
 import { ToastContainer } from "react-toastify";
+import NotFound from "./pages/Notfound";
+import Ai from "./components/Ai";
 
 function App() {
   const { userData } = useContext(userDataContext);
@@ -119,7 +121,9 @@ function App() {
             )
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
+      <Ai />
     </>
   );
 }
