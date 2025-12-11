@@ -15,7 +15,10 @@ import orderRouter from "./routes/order.routes.js";
 const app = express();
 app.use(
   cors({
-    origin: ["https://nexbuy-e-commerse-frontend.onrender.com"],
+    origin: [
+      "https://nexbuy-e-commerse-frontend.onrender.com",
+      "https://nexbuy-e-commerse-admin.onrender.com",
+    ],
     credentials: true,
   })
 );
