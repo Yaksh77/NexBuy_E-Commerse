@@ -7,16 +7,20 @@ import { authDataContext } from "../../context/AuthContext";
 import axios from "axios";
 import { adminDataContext } from "../../context/AdminContext";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
+import Loading from "../components/Loading";
 
 function Login() {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const { serverUrl } = useContext(authDataContext);
   const { getAdmin } = useContext(adminDataContext);
 
   const adminLogin = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const response = await axios.post(
@@ -24,9 +28,13 @@ function Login() {
         { email, password },
         { withCredentials: true }
       );
+      setLoading(false);
+      toast.success("Admin login successfully");
       getAdmin();
       navigate("/");
     } catch (error) {
+      setLoading(false);
+      toast.error("Admin login failed");
       console.log("Admin login error: ", error);
     }
   };
@@ -83,7 +91,7 @@ function Login() {
             )}
 
             <button className="w-[100%] h-[50px] bg-[#6060f5] rounded-lg flex items-center justify-center mt-[20px] text-[17px] font-semibold">
-              Login
+              {loading ? <Loading /> : "Login"}
             </button>
           </div>
         </form>

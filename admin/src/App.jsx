@@ -7,11 +7,13 @@ import { useContext } from "react";
 import { adminDataContext } from "../context/AdminContext";
 import Navbar from "./components/Navbar";
 import Lists from "./pages/Lists";
+import { ToastContainer, toast } from "react-toastify";
 
 function App() {
   let { adminData } = useContext(adminDataContext);
   return (
     <>
+      <ToastContainer />
       {!adminData ? (
         <Login />
       ) : (

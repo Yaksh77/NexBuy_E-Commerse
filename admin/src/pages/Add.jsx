@@ -3,6 +3,8 @@ import Sidebar from "../components/Sidebar";
 import uploadImage from "../assets/imageUpload.jpg";
 import { authDataContext } from "../../context/AuthContext";
 import axios from "axios";
+import { toast } from "react-toastify";
+import Loading from "../components/Loading";
 
 function Add() {
   const [image1, setImage1] = useState(false);
@@ -16,9 +18,11 @@ function Add() {
   const [subCategory, setSubCategory] = useState("TopWear");
   const [bestseller, setBestseller] = useState(false);
   const [sizes, setSizes] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { serverUrl } = useContext(authDataContext);
 
   const handleAddProduct = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const formData = new FormData();
@@ -52,8 +56,12 @@ function Add() {
         setBestseller(false);
         setSizes([]);
       }
+      setLoading(false);
+      toast.success("Product added successfully");
       console.log(response.data);
     } catch (error) {
+      setLoading(false);
+      toast.error("Failed to add product");
       console.log(error);
     }
   };
@@ -317,7 +325,7 @@ function Add() {
             </label>
           </div>
           <button className="w-[140px] px-[20px] py-[20px] rounded-xl bg-[#65d8f7] flex items-center justify-center gap-[10px] text-black active:bg-slate-700 active:text-white active:border-[2px] border-white">
-            Add Prdouct
+            {loading ? <Loading /> : "Add Product"}
           </button>
         </form>
       </div>

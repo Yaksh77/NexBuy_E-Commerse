@@ -9,16 +9,20 @@ import axios from "axios";
 import { auth, provider } from "../../utils/Firebase";
 import { signInWithPopup } from "firebase/auth";
 import { userDataContext } from "../context/UserContext";
+import Loading from "../components/Loading";
+import { toast } from "react-toastify";
 
 function Login() {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const { serverUrl } = useContext(authDataContext);
   const { getCurrentUser } = useContext(userDataContext);
 
   const handleLogin = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const response = await axios.post(
@@ -26,10 +30,13 @@ function Login() {
         { email, password },
         { withCredentials: true }
       );
+      setLoading(false);
+      toast.success("User login successfully");
       getCurrentUser();
       navigate("/");
-      console.log(response.data);
     } catch (error) {
+      setLoading(false);
+      toast.error("User login failed");
       console.log(error);
     }
   };
@@ -115,7 +122,7 @@ function Login() {
             )}
 
             <button className="w-[100%] h-[50px] bg-[#6060f5] rounded-lg flex items-center justify-center mt-[20px] text-[17px] font-semibold">
-              Login
+              {loading ? <Loading /> : "Login"}
             </button>
             <p className="flex gap-[10px]">
               You have no account?
